@@ -13,8 +13,16 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('order_id')->constrained()->onDelete('cascade');
+            $table->string('gateway'); // ex: stripe, mercadopago, pix_asaas
+            $table->string('transaction_id')->unique(); // ID retornado pelo gateway
+            $table->decimal('amount', 10, 2); // Valor total pago
+            $table->string('payment_method'); // ex: credit_card, pix, boleto
+            $table->enum('status', ['pending', 'approved', 'refunded', 'failed'])->default('pending');
+            $table->json('gateway_response')->nullable(); // Guarda o JSON inteiro enviado pelo gateway para auditoria
             $table->timestamps();
         });
+
     }
 
     /**

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('shipping_methods', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // ex: Correios SEDEX, Loggi, Retirada
-            $table->string('code')->unique(); // ex: correios_sedex
+            $table->string('code')->unique();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('seller_bank_accounts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('seller_id')->constrained()->onDelete('cascade');
+            $table->string('bank_code'); // Código do banco (ex: 001, 341)
+            $table->string('agency');
+            $table->string('account');
+            $table->string('account_type'); // corrente ou poupanca
+            $table->string('pix_key')->nullable();
             $table->timestamps();
         });
     }

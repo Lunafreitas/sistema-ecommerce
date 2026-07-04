@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->foreignId('seller_id')->constrained()->onDelete('cascade'); // Importante para calcular a nota média da loja
+            $table->integer('rating'); // ex: de 1 a 5 estrelas
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

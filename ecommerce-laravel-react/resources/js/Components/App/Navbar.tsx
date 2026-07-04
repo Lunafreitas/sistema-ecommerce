@@ -25,7 +25,6 @@ export default function Navbar() {
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between items-center">
                         
-                        {/* Lado Esquerdo: Logo e Navegação */}
                         <div className="flex items-center space-x-8 h-full">
                             <div className="flex shrink-0 items-center">
                                 <Link href={route('dashboard')}>
@@ -34,7 +33,10 @@ export default function Navbar() {
                             </div>
                             
                             <div className="hidden sm:flex items-center space-x-8 h-full">
-                                {/* Botão de Categorias */}
+                                <NavLink href={route('dashboard')} active={route().current('dashboard')} className={textStyle}>
+                                    <span>Início</span>
+                                </NavLink>
+
                                 <div className="flex items-center h-full" onMouseEnter={() => setIsOpen(true)}>
                                     <button className={`focus:outline-none flex items-center space-x-1 h-full ${textStyle}`}>
                                         <span>Categorias</span>

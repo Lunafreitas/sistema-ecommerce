@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('sellers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade'); // Dono da loja
+            $table->string('store_name');
+            $table->string('slug')->unique();
+            $table->string('document')->unique(); // CPF ou CNPJ
+            $table->enum('status', ['pending', 'active', 'suspended'])->default('pending');
             $table->timestamps();
         });
     }

@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('commissions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('seller_id')->nullable()->constrained()->onDelete('cascade'); // Nulo se for taxa global
+            $table->foreignId('category_id')->nullable()->constrained()->onDelete('cascade'); // Taxa por categoria
+            $table->decimal('percentage', 5, 2)->default(0.00); // ex: 10.50%
+            $table->decimal('fixed_fee', 10, 2)->default(0.00); // ex: R$ 2,00 por venda
             $table->timestamps();
         });
+
     }
 
     /**

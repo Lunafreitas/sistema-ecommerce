@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('seller_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->text('description')->nullable();
+            $table->decimal('price', 10, 2);
+            $table->integer('stock')->default(0);
+            $table->decimal('weight', 8, 2)->default(0.00); // Em kg (importante para cálculo de frete)
+            $table->decimal('width', 6, 2)->default(0.00);  // Em cm
+            $table->decimal('height', 6, 2)->default(0.00); // Em cm
+            $table->decimal('length', 6, 2)->default(0.00); // Em cm
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

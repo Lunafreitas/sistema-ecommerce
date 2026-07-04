@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('address_id')->constrained(); // Endereço de entrega fixado na venda
+            $table->decimal('total_amount', 10, 2); // Soma de todos os produtos + fretes
+            $table->enum('status', ['pending', 'paid', 'failed', 'canceled'])->default('pending');
             $table->timestamps();
         });
+
     }
 
     /**
